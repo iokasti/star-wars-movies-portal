@@ -13,13 +13,7 @@ function App() {
   const [sortKey, setSortKey] = useState("release_date");
   const [loading, setLoading] = useState(false);
 
-  const movieDetailsList = [
-    "Poster",
-    "opening_crawl",
-    "director",
-    "averageRating",
-    "Ratings",
-  ];
+  const movieDetailsList = ["Poster", "opening_crawl", "director", "averageRating", "Ratings"];
 
   useEffect(() => {
     const fetchAndSetMovies = async () => {
@@ -32,17 +26,12 @@ function App() {
             try {
               const releaseDate = movie.release_date;
               if (!releaseDate) {
-                console.warn(
-                  `Movie ${movie.title} does not have a release date`
-                );
+                console.warn(`Movie ${movie.title} does not have a release date`);
                 return movie;
               }
 
               const releaseYear = releaseDate.substring(0, 4); // Extract the year from release date
-              const details = await fetchPostersAndRatings(
-                movie.title,
-                releaseYear
-              );
+              const details = await fetchPostersAndRatings(movie.title, releaseYear);
 
               if (details) {
                 const averageRating = parseFloat(details.imdbRating);
@@ -50,19 +39,16 @@ function App() {
               }
               return movie;
             } catch (error) {
-              console.error(
-                `Error fetching details for ${movie.title}:`,
-                error
-              );
+              console.error(`Error fetching details for ${movie.title}:`, error);
               return movie;
             }
-          })
+          }),
         );
         setMovies(moviesWithDetails);
         setFilteredMovies(moviesWithDetails);
       } catch (error) {
         console.error("Error fetching movies:", error);
-      }finally {
+      } finally {
         setLoading(false);
       }
     };
@@ -86,37 +72,22 @@ function App() {
     <div className="App">
       <header className="header">
         <div className="header-container">
-          <SearchBar
-            className="search-bar"
-            movies={movies}
-            onResultsUpdate={handleResultsUpdate}
-          />
-          <SortMenu
-            className="sort-dropdown"
-            sortKey={sortKey}
-            onSortChange={handleSortChange}
-          />
+          <SearchBar className="search-bar" movies={movies} onResultsUpdate={handleResultsUpdate} />
+          <SortMenu className="sort-dropdown" sortKey={sortKey} onSortChange={handleSortChange} />
         </div>
       </header>
       {loading ? (
-          <div>Loading...</div>
+        <div>Loading...</div>
       ) : (
-      <main className="main-content">
-              <div className="box left-box">
-              <Movies
-                  movies={filteredMovies}
-                  onMovieClick={handleSelectMovie}
-                  sortKey={sortKey}
-              />
-                </div>
-        <div className="box right-box">
-          <MovieDetails
-            movie={selectedMovie}
-            movieDetailsList={movieDetailsList}
-          ></MovieDetails>
-        </div>
-      </main>
-          )}
+        <main className="main-content">
+          <div className="box left-box">
+            <Movies movies={filteredMovies} onMovieClick={handleSelectMovie} sortKey={sortKey} />
+          </div>
+          <div className="box right-box">
+            <MovieDetails movie={selectedMovie} movieDetailsList={movieDetailsList}></MovieDetails>
+          </div>
+        </main>
+      )}
     </div>
   );
 }

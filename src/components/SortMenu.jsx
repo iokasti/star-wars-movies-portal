@@ -8,7 +8,7 @@ const sortingOptions = [
   { key: "rating", value: "averageRating", text: "Sorted by rating" },
 ];
 
-const SortMenu = ({ sortKey = 'release_date', onSortChange = () => {} }) => {
+const SortMenu = ({ sortKey = "release_date", onSortChange = () => {} }) => {
   return (
     <Select
       placeholder="Select sort option"

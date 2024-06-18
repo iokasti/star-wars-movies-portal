@@ -32,9 +32,7 @@ const MovieDetails = ({ movie, movieDetailsList }) => {
                 {Object.entries(movie)
                   .filter(
                     ([key]) =>
-                      movieDetailsList.includes(key) &&
-                      key !== "Poster" &&
-                      key !== "opening_crawl"
+                      movieDetailsList.includes(key) && key !== "Poster" && key !== "opening_crawl",
                   )
                   .map(([key, value]) => {
                     if (key === "Ratings") {
@@ -87,10 +85,10 @@ MovieDetails.propTypes = {
     director: PropTypes.string,
     averageRating: PropTypes.number,
     Ratings: PropTypes.arrayOf(
-        PropTypes.shape({
-          Source: PropTypes.string.isRequired,
-          Value: PropTypes.string.isRequired,
-        })
+      PropTypes.shape({
+        Source: PropTypes.string.isRequired,
+        Value: PropTypes.string.isRequired,
+      }),
     ),
     imdbID: PropTypes.string,
   }),
