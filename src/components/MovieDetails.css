@@ -1,0 +1,33 @@
+.movie-details {
+    margin: 20px;
+}
+
+.details-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.poster {
+    margin-right: 20px;
+}
+
+.info {
+    flex: 1;
+}
+
+.crawl {
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.play-icon {
+    margin-left: 10px !important;
+}
